@@ -1,13 +1,12 @@
-// Load all pages in variables
-const welcmPage = document.getElementById("welcm-page");
-const homePage = document.getElementById("home-page");
-const redCrescentPage = document.getElementById("rc-page");
-const collegePage = document.getElementById("college-page");
-const menubar = document.getElementById("menubar");
-const menuPage = document.getElementById("menu-page");
-const appInfoPage = document.getElementById("app-info-page");
+const welcmPage = document.getElementById("welcm-pg");
+const homePage = document.getElementById("home-pg");
+const hamburgerIcon = document.getElementById("hamburger");
+const menuPage = document.getElementById("menu-pg");
+const appInfoPage = document.getElementById("app-inf-pg");
+const redCrescentPage = document.getElementById("rc-pg");
+const collegePage = document.getElementById("clg-pg");
+const pages = document.querySelectorAll(".page");
 
-// show logo onload
 window.onload = function() {
   welcmPage.style.left = "0";
   setTimeout(function() {
@@ -16,58 +15,56 @@ window.onload = function() {
   }, 1500);
 }
 
-// all function onclick
-function showRedCrescentPage() {
-  homePage.style.left = "-100%";
-  redCrescentPage.style.left = "0";
-}
-
-function showCollegePage() {
-  homePage.style.left = "-100%";
-  collegePage.style.left = "0";
-}
-
 function menuHandler() {
-  if (menubar.className === "menubar") {
-    menubar.className = "menubar close-menu";
+  if (hamburgerIcon.className === "hamburger") {
+    hamburgerIcon.className = "hamburger close-menu";
     menuPage.style.left = "0";
   } else {
-    menubar.className = "menubar";
+    hamburgerIcon.className = "hamburger";
     menuPage.style.left = "-100%";
   }
 }
 
-function showAppInfoPage() {
-  appInfoPage.style.left = "0";
-}
-
-function backFromAppInfo() {
-  appInfoPage.style.left = "-100%";
-}
-
-function backToHome(pg) {
-  if (pg === "rc-page") {
-    redCrescentPage.style.left = "-100%";
-  } else if (pg === "college-page") {
-    collegePage.style.left = "-100%";
-  }
-  homePage.style.left="0";
-}
-
-function themeHandler (color) {
-  let pages = document.querySelectorAll(".page");
-  for (let page of pages) {
-    page.style.backgroundColor = color;
-  }
-  if (color === "#FFFFFF") {
-    document.body.style.color = "black";
+function appInfoPageHandler(cmd) {
+  if (cmd) {
+    appInfoPage.style.left = "0";
   } else {
-    document.body.style.color = "white";
+    appInfoPage.style.left = "-100%";
+  }
+}
+
+function redCrescentPageHandler(cmd) {
+  if (cmd) {
+    homePage.style.left = "-100%";
+    redCrescentPage.style.left = "0";
+  } else {
+    redCrescentPage.style.left = "-100%";
+    homePage.style.left = "0";
+  }
+}
+
+function collegePageHandler(cmd) {
+  if (cmd) {
+    homePage.style.left = "-100%";
+    collegePage.style.left = "0";
+  } else {
+    collegePage.style.left = "-100%";
+    homePage.style.left = "0";
+  }
+}
+
+function themeHandler(bgColr) {
+  var colr = bgColr === "white" ? "black" : "white";
+  var indx = 0;
+  while (indx < 6) {
+    pages[indx].style.backgroundColor = bgColr;
+    pages[indx].style.color = colr;
+    indx++;
   }
 }
 
 function langHandler(lang) {
   if (lang === "bn") {
-    alert("multi-language feature has not  been implemented yet: please wait for future update");
+    alert("multi-language feature has not been implemented yet");
   }
 }
